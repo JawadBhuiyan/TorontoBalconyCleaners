@@ -8,4 +8,4 @@ binding = "ASSETS"
 
 [vars]
 BUSINESS_EMAIL = "bookings@torontobalconycleaners.com"
-FROM_EMAIL = "onboarding@resend.dev"
+FROM_EMAIL = "noreply@torontobalconycleaners.com"

@@ -28,9 +28,6 @@
 
 /* Nav scroll state */
 .nav-scrolled {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 4px 24px rgba(27, 28, 28, 0.06);
 }
 

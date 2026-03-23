@@ -65,10 +65,10 @@
 <body class="bg-background text-on-surface font-body antialiased">
 
   <!-- Top Navigation -->
-  <nav id="main-nav" class="fixed top-0 w-full z-50 bg-white/20 backdrop-blur-xl shadow-sm transition-all duration-300" aria-label="Main navigation">
-    <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+  <nav id="main-nav" class="fixed top-0 w-full z-50 bg-white shadow-sm transition-all duration-300" aria-label="Main navigation">
+    <div class="flex justify-between items-center px-6 md:px-8 py-0 max-w-7xl mx-auto">
       <a href="#" class="flex-shrink-0">
-        <img src="/assets/logo.png" alt="Toronto Balcony Cleaners" class="h-10 md:h-12 w-auto"/>
+        <img src="/assets/logo.png" alt="Toronto Balcony Cleaners" class="h-16 md:h-20 w-auto"/>
       </a>
       <div class="hidden md:flex items-center gap-10">
         <a class="text-primary/70 hover:text-primary font-medium tracking-tight transition-all duration-300" href="#services">Services</a>
@@ -77,9 +77,9 @@
         <a class="text-primary/70 hover:text-primary font-medium tracking-tight transition-all duration-300" href="#reviews">Reviews</a>
       </div>
       <div class="hidden md:flex items-center gap-5">
-        <a href="tel:+14165551234" class="flex items-center gap-2 text-accent font-bold tracking-tight hover:text-primary transition-all duration-300">
+        <a href="tel:+16477713075" class="flex items-center gap-2 text-accent font-bold tracking-tight hover:text-primary transition-all duration-300">
           <span class="material-symbols-outlined text-xl">call</span>
-          (416) 555-1234
+          (647) 771-3075
         </a>
         <a href="#booking" class="btn-gradient text-white px-7 py-3 rounded-xl font-bold transition-all active:scale-95 duration-150 hover:scale-[1.02]">
           Book Now
@@ -100,9 +100,9 @@
         <a class="text-primary font-semibold text-lg tracking-tight" href="#gallery">Gallery</a>
         <a class="text-primary font-semibold text-lg tracking-tight" href="#process">Process</a>
         <a class="text-primary font-semibold text-lg tracking-tight" href="#reviews">Reviews</a>
-        <a href="tel:+14165551234" class="flex items-center justify-center gap-3 bg-surface text-primary px-7 py-4 rounded-xl font-bold text-lg">
+        <a href="tel:+16477713075" class="flex items-center justify-center gap-3 bg-surface text-primary px-7 py-4 rounded-xl font-bold text-lg">
           <span class="material-symbols-outlined">call</span>
-          (416) 555-1234
+          (647) 771-3075
         </a>
         <a href="#booking" class="btn-gradient text-white px-7 py-4 rounded-xl font-bold text-center text-lg">
           Book Now
@@ -197,11 +197,9 @@
       </div>
       <div id="before-after" class="relative max-w-5xl mx-auto aspect-video rounded-[2rem] md:rounded-[3.5rem] overflow-hidden luxury-shadow select-none">
         <!-- After image (full) -->
-        <img class="absolute inset-0 w-full h-full object-cover" alt="Pristine and clean modern balcony with city view" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCNF4yv5yaVJtgeexsC0HhJ3u6nS5x9hKN_TlDwWmJVX1vMfI0G3nLfZcrMNgvNLN38GGXOd3YjD09GOwTbg7Mq1ovNBHamkyy8C1GK6gjvbGxEZNy1bDEOCG1p7e2qwaiSN163558iQaaszCJUK5yyxytQctfTl_bxiKHyorCvHliQKJ9u0g6nWTMvm92R2ahY9Yfm6_4xc0LXM4ddMFXI24BNxLmgB-mGOhlPdhKTsyg8yXoFvJWj7hFqWCRgGgXFax219tOuMFf"/>
-        <!-- Before image (clipped) -->
-        <div id="before-clip" class="absolute inset-0 w-1/2 overflow-hidden z-10">
-          <img class="absolute inset-0 w-full h-full object-cover brightness-75 contrast-75 grayscale-[0.5]" style="width: 200%; max-width: none;" alt="Dirty and dusty balcony floor needing cleaning" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABLpVAA_kT0p2n_Un5SFOw01DRZjl0D_qWEDM4hH91Q6TXpuBBNgg8aUd18u5F89nPCN6iNgtiTWBCjdMVioHsiM5wDk-RPt0KVOz7hJGhFyBS-7eSpwbTgAnXEavnNirCQWi-f87Q0QZQPWRURzkIXFUUSBEekqHmbjqQnSAPTyCW44b8yBfx_AJgXIuzknKGQEPOa6LLLSvut8u77ZyUwqh1uZFTlYOJtQaezkDQ9LmEZvayzYeOblLjWYz10l1dxhUNHpl-d-Se"/>
-        </div>
+        <img class="absolute inset-0 w-full h-full object-cover" alt="Clean balcony after professional cleaning" loading="lazy" src="/assets/after.png"/>
+        <!-- Before image (clipped via clip-path) -->
+        <img id="before-img" class="absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Dirty balcony before cleaning" loading="lazy" src="/assets/before.png"/>
         <!-- Labels -->
         <div class="absolute bottom-6 md:bottom-10 left-6 md:left-10 z-20 bg-primary/80 backdrop-blur-md px-5 py-2 rounded-full text-white font-bold text-xs uppercase tracking-[0.2em]">Before</div>
         <div class="absolute bottom-6 md:bottom-10 right-6 md:right-10 z-20 bg-accent/80 backdrop-blur-md px-5 py-2 rounded-full text-white font-bold text-xs uppercase tracking-[0.2em]">After</div>
@@ -327,9 +325,14 @@
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="9:00 AM">9:00 AM</button>
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="10:00 AM">10:00 AM</button>
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="11:00 AM">11:00 AM</button>
+                  <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="12:00 PM">12:00 PM</button>
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="1:00 PM">1:00 PM</button>
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="2:00 PM">2:00 PM</button>
                   <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="3:00 PM">3:00 PM</button>
+                  <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="4:00 PM">4:00 PM</button>
+                  <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="5:00 PM">5:00 PM</button>
+                  <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="6:00 PM">6:00 PM</button>
+                  <button type="button" class="timeslot-btn p-4 rounded-2xl bg-surface text-primary/50 font-bold text-sm tracking-tight hover:bg-surface-low transition-all" data-value="7:00 PM">7:00 PM</button>
                 </div>
               </div>
               <!-- Honeypot — hidden from humans, catches bots -->
@@ -351,13 +354,13 @@
   <footer class="w-full bg-primary py-12 md:py-16 text-sm font-body tracking-wide">
     <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
       <div class="flex flex-col items-center md:items-start gap-4">
-        <img src="/assets/logo.png" alt="Toronto Balcony Cleaners" class="h-10 w-auto brightness-0 invert"/>
+        <img src="/assets/logo-light.png" alt="Toronto Balcony Cleaners" class="h-10 w-auto"/>
         <p class="text-white/40 max-w-xs text-center md:text-left leading-relaxed">
           Professional high-rise balcony maintenance for Toronto's urban residents. High-altitude precision.
         </p>
-        <a href="tel:+14165551234" class="flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-200">
+        <a href="tel:+16477713075" class="flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-200">
           <span class="material-symbols-outlined text-lg">call</span>
-          (416) 555-1234
+          (647) 771-3075
         </a>
       </div>
       <div class="flex flex-wrap justify-center gap-8 md:gap-10">

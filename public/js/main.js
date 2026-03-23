@@ -59,9 +59,9 @@ function initMobileMenu() {
 // ----- Before/After slider -----
 function initBeforeAfterSlider() {
   const container = document.getElementById('before-after');
-  const clip = document.getElementById('before-clip');
+  const beforeImg = document.getElementById('before-img');
   const handle = document.getElementById('slider-handle');
-  if (!container || !clip || !handle) return;
+  if (!container || !beforeImg || !handle) return;
 
   let isDragging = false;
 
@@ -69,7 +69,7 @@ function initBeforeAfterSlider() {
     const rect = container.getBoundingClientRect();
     let pct = ((x - rect.left) / rect.width) * 100;
     pct = Math.max(2, Math.min(98, pct));
-    clip.style.width = pct + '%';
+    beforeImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
     handle.style.left = pct + '%';
   }
 
