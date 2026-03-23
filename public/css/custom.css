@@ -83,6 +83,34 @@
   color: rgba(10, 25, 47, 0.5);
 }
 
+/* Timeslot toggle */
+.timeslot-btn.active {
+  background-color: #0A192F;
+  color: white;
+}
+
+.timeslot-btn:not(.active) {
+  background-color: #f5f2f0;
+  color: rgba(10, 25, 47, 0.5);
+}
+
+/* Native date input styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: opacity(0.5);
+  cursor: pointer;
+}
+
+/* Form error banner */
+.form-error-banner {
+  background: rgba(186, 26, 26, 0.08);
+  color: #ba1a1a;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
 /* Form focus bottom-bar animation */
 .form-input,
 .form-select {
