@@ -71,9 +71,10 @@ async function handleBooking(request, env) {
   const bookingDate = new Date(date + 'T00:00:00');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  if (isNaN(bookingDate.getTime()) || bookingDate <= today) {
-    return json({ success: false, error: 'Date must be in the future' }, 400);
+  if (isNaN(bookingDate.getTime()) || bookingDate < today) {
+    return json({ success: false, error: 'Date must be today or later' }, 400);
   }
+  const isSameDay = bookingDate.getTime() === today.getTime();
 
   // Send email via Resend
   try {
@@ -90,7 +91,7 @@ async function handleBooking(request, env) {
         from: env.FROM_EMAIL,
         to: [env.BUSINESS_EMAIL],
         reply_to: email.trim(),
-        subject: `New Booking: ${esc(name.trim())} — ${serviceLabel} on ${esc(date)}`,
+        subject: `New Booking: ${esc(name.trim())} — ${serviceLabel} on ${esc(date)}${isSameDay ? ' ⚡ SAME-DAY' : ''}`,
         html: `
           <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;">
             <h2 style="color:#0A192F;">New Booking Request</h2>
@@ -99,7 +100,7 @@ async function handleBooking(request, env) {
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Email</td><td style="padding:10px 12px;border-bottom:1px solid #eee;"><a href="mailto:${esc(email.trim())}">${esc(email.trim())}</a></td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Neighborhood</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(neighborhood)}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Service</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${serviceLabel}</td></tr>
-              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Date</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(date)}</td></tr>
+              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Date</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(date)}${isSameDay ? ' <span style="color:#d97706;font-weight:700;">— Same-Day (+$75)</span>' : ''}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Time Slot</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(timeSlot)}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Add-Ons</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${Array.isArray(addons) && addons.length ? addons.map(a => esc(ADDON_LABELS[a] || a)).join(', ') : 'None'}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Tiling</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${Array.isArray(tiling) && tiling.length ? tiling.map(t => esc(TILING_LABELS[t] || t)).join(', ') : 'None'}</td></tr>

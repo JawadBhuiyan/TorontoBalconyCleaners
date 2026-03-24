@@ -132,13 +132,19 @@ function initDateConstraints() {
   const dateInput = document.getElementById('booking-date');
   if (!dateInput) return;
 
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  dateInput.min = tomorrow.toISOString().split('T')[0];
+  const today = new Date();
+  dateInput.min = today.toISOString().split('T')[0];
 
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 60);
   dateInput.max = maxDate.toISOString().split('T')[0];
+
+  const surchargeNotice = document.getElementById('same-day-notice');
+  dateInput.addEventListener('change', () => {
+    if (!surchargeNotice) return;
+    const todayStr = new Date().toISOString().split('T')[0];
+    surchargeNotice.classList.toggle('hidden', dateInput.value !== todayStr);
+  });
 }
 
 // ----- Dropdown toggles -----
