@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceToggle();
   initTimeslotToggle();
   initDateConstraints();
+  initDropdownToggles();
   initSmoothScroll();
   initFormValidation();
 });
@@ -140,6 +141,18 @@ function initDateConstraints() {
   dateInput.max = maxDate.toISOString().split('T')[0];
 }
 
+// ----- Dropdown toggles -----
+function initDropdownToggles() {
+  document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      if (!panel) return;
+      panel.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  });
+}
+
 // ----- Smooth scroll with nav offset -----
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -214,14 +227,25 @@ function initFormValidation() {
 
     if (!valid) return;
 
+    // Collect optional selections
+    const addons = [...form.querySelectorAll('input[name="addons"]:checked')]
+      .map(cb => cb.value);
+    const tiling = [...form.querySelectorAll('input[name="tiling"]:checked')]
+      .map(cb => cb.value);
+    const nets = [...form.querySelectorAll('input[name="nets"]:checked')]
+      .map(cb => cb.value);
+
     // Build payload
     const formData = {
       name: name.value.trim(),
       email: email.value.trim(),
       neighborhood: neighborhood.value,
-      service: activeService?.dataset.value || 'standard',
+      service: activeService?.dataset.value || 'silver',
       date: date.value,
       timeSlot: activeTimeslot.dataset.value,
+      addons,
+      tiling,
+      nets,
       website: honeypot?.value || '',
     };
 

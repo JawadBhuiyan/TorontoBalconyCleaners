@@ -1,3 +1,27 @@
+const ADDON_LABELS = {
+  bbq: 'BBQ Deep Clean',
+  furniture: 'Outdoor Furniture Treatment',
+  bird: 'Bird & Pigeon Dropping Removal',
+  seasonal: 'Seasonal Open / Close',
+  planter: 'Plant & Planter Tidy',
+  recurring: 'Recurring Maintenance Plan',
+};
+
+const TILING_LABELS = {
+  porcelain: 'Porcelain Tile (Interlocking)',
+  composite: 'Composite Decking Tiles',
+  cedar: 'Natural Cedar Decking',
+  rubber: 'Rubber Safety Tiles',
+};
+
+const NET_LABELS = {
+  pigeon: 'Pigeon & Bird Deterrent Net',
+  insect: 'Insect & Mosquito Screen',
+  safety: 'Child & Pet Safety Net',
+  privacy: 'Full Enclosure Privacy Screen',
+  removal: 'Net Removal & Reinstallation',
+};
+
 const ALLOWED_TIME_SLOTS = [
   '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
   '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM',
@@ -29,7 +53,7 @@ async function handleBooking(request, env) {
     return json({ success: true });
   }
 
-  const { name, email, neighborhood, service, date, timeSlot } = body;
+  const { name, email, neighborhood, service, date, timeSlot, addons, tiling, nets } = body;
 
   // Server-side validation
   if (!name?.trim() || !email?.trim() || !neighborhood || !date || !timeSlot) {
@@ -53,7 +77,8 @@ async function handleBooking(request, env) {
 
   // Send email via Resend
   try {
-    const serviceLabel = service === 'restore' ? 'Full Restore' : 'Standard Clean';
+    const serviceLevels = { silver: 'Silver', gold: 'Gold', platinum: 'Platinum' };
+    const serviceLabel = serviceLevels[service] || 'Silver';
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -75,7 +100,10 @@ async function handleBooking(request, env) {
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Neighborhood</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(neighborhood)}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Service</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${serviceLabel}</td></tr>
               <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Date</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(date)}</td></tr>
-              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;">Time Slot</td><td style="padding:10px 12px;">${esc(timeSlot)}</td></tr>
+              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Time Slot</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${esc(timeSlot)}</td></tr>
+              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Add-Ons</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${Array.isArray(addons) && addons.length ? addons.map(a => esc(ADDON_LABELS[a] || a)).join(', ') : 'None'}</td></tr>
+              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;border-bottom:1px solid #eee;">Tiling</td><td style="padding:10px 12px;border-bottom:1px solid #eee;">${Array.isArray(tiling) && tiling.length ? tiling.map(t => esc(TILING_LABELS[t] || t)).join(', ') : 'None'}</td></tr>
+              <tr><td style="padding:10px 12px;font-weight:600;color:#0A192F;">Net &amp; Screen</td><td style="padding:10px 12px;">${Array.isArray(nets) && nets.length ? nets.map(n => esc(NET_LABELS[n] || n)).join(', ') : 'None'}</td></tr>
             </table>
             <p style="color:#666;font-size:14px;">Reply to this email to respond directly to the customer.</p>
           </div>

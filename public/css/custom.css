@@ -97,6 +97,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+/* Dropdown panels */
+.dropdown-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.dropdown-panel.open {
+  max-height: 400px;
+}
+
+.dropdown-toggle .material-symbols-outlined {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
 /* Form error banner */
 .form-error-banner {
   background: rgba(186, 26, 26, 0.08);
