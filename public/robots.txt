@@ -1,0 +1,7 @@
+# Toronto Balcony Cleaners - robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://torontobalconycleaners.com/sitemap.xml
